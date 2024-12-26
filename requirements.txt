@@ -14,3 +14,4 @@ statsmodels
 xlrd
 xlsxwriter
 pandas_ta
+setuptools
