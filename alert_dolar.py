@@ -55,8 +55,8 @@ y_pred = model.predict(X_test)
 
 #função de alerta via telegram
 def send_telegram_message(message):
-    token = "8059277119:AAEGcOtpnyxjQMCRPf-0Brl7FTsQpIAnVQs"
-    chat_id = "SEU_CHAT_ID"
+    token = "7654351807:AAHJ-Pve956eUVbRDMpF17iDG6Qv-V8zovM"
+    chat_id = "-1002473077704"
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     params = {"chat_id": chat_id, "text": message}
     response = requests.get(url, params=params)
