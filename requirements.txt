@@ -13,4 +13,4 @@ openpyxl
 statsmodels
 xlrd
 xlsxwriter
-pandas-ta
+pandas_ta==0.3.14
