@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas_ta as ta
 import numpy as np
+import requests
 
 from datetime import datetime, timedelta, date
 
