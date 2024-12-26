@@ -1,0 +1,16 @@
+numpy
+pandas
+pydeck
+streamlit==1.41.0
+matplotlib
+seaborn
+yfinance
+scipy
+plotly
+scikit-learn
+xgboost
+openpyxl
+statsmodels
+xlrd
+xlsxwriter
+pandas-ta
