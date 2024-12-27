@@ -30,14 +30,21 @@ def get_data():
 # Função para processar os dados
 def preprocess_data(data):
     # Cálculo do Estocástico Lento
+    # Definir a janela para cálculo do Estocástico Lento
+    fastk_period = 14
+    slowk_period = 3
+    
     high = data['High']
     low = data['Low']
     close = data['Close']
-    
-    # Calculando o valor de %K (Estocástico Lento)
-    lowest_low = low.rolling(window=14).min()
-    highest_high = high.rolling(window=14).max()
+
+    # Cálculo do Estocástico Lento %K
+    lowest_low = low.rolling(window=fastk_period).min()
+    highest_high = high.rolling(window=fastk_period).max() 
+    # Cálculo do %K (Estocástico Lento)
     data['Stochastic_K'] = 100 * (close - lowest_low) / (highest_high - lowest_low)
+    # Cálculo do %D (média móvel suavizada de %K com uma janela de 3 dias)
+    data['Stochastic_D'] = data['Stochastic_K'].rolling(window=slowk_period).mean(
 
     # Calculando RSI 
     delta = close.diff()  # Diferença de preço entre o atual e anterior
