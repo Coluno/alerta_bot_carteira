@@ -44,7 +44,7 @@ def preprocess_data(data):
     # Cálculo do %K (Estocástico Lento)
     data['Stochastic_K'] = 100 * (close - lowest_low) / (highest_high - lowest_low)
     # Cálculo do %D (média móvel suavizada de %K com uma janela de 3 dias)
-    data['Stochastic_D'] = data['Stochastic_K'].rolling(window=slowk_period).mean(
+    data['Stochastic_D'] = data['Stochastic_K'].rolling(window=slowk_period).mean()
 
     # Calculando RSI 
     delta = close.diff()  # Diferença de preço entre o atual e anterior
