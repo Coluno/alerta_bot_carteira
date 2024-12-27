@@ -5,7 +5,7 @@ import yfinance as yf
 import requests
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from numpy import nan as npNaN
+from numpy import NaN as npNaN
 import pandas_ta as ta
 
 # Função para enviar mensagem via Telegram
