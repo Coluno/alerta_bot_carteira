@@ -9,8 +9,8 @@ from sklearn.model_selection import train_test_split
 
 # Função para enviar mensagem via Telegram
 def send_telegram_message(message):
-    token = "7654351807:AAHJ-Pve956eUVbRDMpF17iDG6Qv-V8zovM"
-    chat_id = "-1002473077704"
+    token = 
+    chat_id = 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     params = {"chat_id": chat_id, "text": message}
     response = requests.get(url, params=params)
