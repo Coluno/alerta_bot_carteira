@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import yfinance as yf
 import requests
-import pandas_ta as ta
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
@@ -31,19 +30,31 @@ def get_data():
 # Função para processar os dados
 def preprocess_data(data):
     # Cálculo do Estocástico Lento
-    stochastic = ta.stoch(data['High'], data['Low'], data['Close'], fastk_period=14, slowk_period=3, slowk_matype=1)
-    data['Stochastic_K'] = stochastic['STOCHk_14_3_3']
+    high = data['High']
+    low = data['Low']
+    close = data['Close']
+    
+    # Calculando o valor de %K (Estocástico Lento)
+    lowest_low = low.rolling(window=14).min()
+    highest_high = high.rolling(window=14).max()
+    data['Stochastic_K'] = 100 * (close - lowest_low) / (highest_high - lowest_low)
 
-    # Calculando RSI
-    data['RSI'] = ta.rsi(data['Close'], length=14)
+    # Calculando RSI 
+    delta = close.diff()  # Diferença de preço entre o atual e anterior
+    gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()  # Média dos ganhos
+    loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()  # Média das perdas
+    rs = gain / loss  # RS (Relative Strength)
+    data['RSI'] = 100 - (100 / (1 + rs))
 
-    # Calculando Bandas de Bollinger
-    bb = ta.bbands(data['Close'], length=20)
-    data['Bollinger_Upper'] = bb['BBU_20_2.0']
-    data['Bollinger_Lower'] = bb['BBL_20_2.0']
+    # Calculando as Bandas de Bollinger
+    sma = close.rolling(window=20).mean()
+    rolling_std = close.rolling(window=20).std()
+    data['Bollinger_Upper'] = sma + (2 * rolling_std)
+    data['Bollinger_Lower'] = sma - (2 * rolling_std)
 
-    # Identificando pontos de venda
-    data['Sell_Signal'] = (data['Stochastic_K'] > 80)
+    #sinais de venda
+    data['Sell_Signal'] = data['Stochastic_K'] > 80
+    
     return data.dropna()
 
 # Função para treinar o modelo
