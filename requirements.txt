@@ -1,6 +1,6 @@
 streamlit==1.41.0
 pandas
-numpy==2.2.0
+numpy==2.1.0
 yfinance
 requests
 scikit-learn
