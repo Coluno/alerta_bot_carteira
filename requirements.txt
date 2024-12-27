@@ -1,8 +1,7 @@
 streamlit==1.41.0
 pandas
-numpy==2.2.1
+numpy
 yfinance
 requests
 scikit-learn
-pandas-ta
 setuptools
